@@ -9,9 +9,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-menu-behavior/iron-menu-behavior.html">
+<link rel="import" href="../iron-menu-behavior/iron-menubar-behavior.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-styles/default-theme.html">
-<link rel="import" href="paper-menu-shared-styles.html">
+<link rel="import" href="../paper-menu/paper-menu-shared-styles.html">
+<link rel="import" href="paper-menu-input-behavior.html">
 
 <!--
 Material design: [Menus](https://www.google.com/design/spec/components/menus.html)
@@ -66,7 +68,7 @@ of a menu item will also focus it.
 @demo demo/index.html
 -->
 
-<dom-module id="paper-menu">
+<dom-module id="paper-menubar-input">
   <template>
     <style include="paper-menu-shared-styles"></style>
     <style>
@@ -81,7 +83,9 @@ of a menu item will also focus it.
       }
     </style>
 
-    <div class="selectable-content">
+    <label hidden$="[[!label]]">[[label]]</label>
+    <input type="hidden" name$="[[name]]" value="[[selected]]">
+    <div class="selectable-content horizontal layout">
       <content></content>
     </div>
   </template>
@@ -89,10 +93,11 @@ of a menu item will also focus it.
   <script>
     (function() {
       Polymer({
-        is: 'paper-menu',
+        is: 'paper-menubar-input',
 
         behaviors: [
-          Polymer.IronMenuBehavior
+          Polymer.IronMenubarBehavior,
+          Polymer.PaperMenuInputBehavior
         ]
       });
     })();

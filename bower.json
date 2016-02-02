@@ -1,5 +1,5 @@
 {
-  "name": "paper-menu",
+  "name": "paper-menu-input",
   "version": "1.2.2",
   "description": "Implements an accessible material design menu",
   "authors": "The Polymer Authors",
@@ -9,16 +9,17 @@
     "menu"
   ],
   "main": [
-    "paper-menu.html",
+    "paper-menu-input.html",
+    "paper-menubar-input.html",
     "paper-submenu.html"
   ],
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/PolymerElements/paper-menu"
+    "url": "git://github.com/cpboyd/paper-menu-input"
   },
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/PolymerElements/paper-menu",
+  "homepage": "https://github.com/cpboyd/paper-menu-input",
   "ignore": [],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.1.0",
@@ -26,7 +27,8 @@
     "iron-collapse": "PolymerElements/iron-collapse#^1.0.0",
     "iron-menu-behavior": "PolymerElements/iron-menu-behavior#^1.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
-    "paper-styles": "PolymerElements/paper-styles#^1.0.0"
+    "paper-styles": "PolymerElements/paper-styles#^1.0.0",
+    "paper-menu": "PolymerElements/paper-menu#^1.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
