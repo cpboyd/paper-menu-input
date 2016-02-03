@@ -48,6 +48,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       name: {
         type: String
       }
+    },
+
+    _updateItems: function() {
+      var nodes = Polymer.dom(this.$.list).queryDistributedElements(this.selectable || '*');
+      nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
+      this._setItems(nodes);
+    },
+    // observe items change under the given node.
+    _childNodesChanged: function(mutations) {
+        this._updateItems();
+        if (this._shouldUpdateSelection) {
+          this._updateSelected();
+        }
+        // Let other interested parties know about the change so that
+        // we don't have to recreate mutation observers everywher.
+        this.fire('iron-items-changed', mutations, {
+          bubbles: false,
+          cancelable: false
+        });
+    },
+    attached: function() {
+      var boundHandler = this._childNodesChanged.bind(this); 
+      this._observer = Polymer.dom(this.$.list).observeNodes(boundHandler);
+      this._updateItems();
+      if (!this._shouldUpdateSelection) {
+        this._updateSelected(this.attrForSelected,this.selected)
+      }
+      this._addListener(this.activateEvent);
     }
   };
 </script>
