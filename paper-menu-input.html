@@ -83,8 +83,15 @@ of a menu item will also focus it.
     </style>
 
     <label hidden$="[[!label]]">[[label]]</label>
-    <input type="hidden" name$="[[name]]" value="[[selected]]">
+    
+    <template is="dom-if" if="[[name]]">
+      <input type="hidden" name$="[[name]]" value="[[selected]]">
+    </template>
+    
     <div class="selectable-content">
+      <template is="dom-repeat" items="{{itemLabels}}">
+        <paper-item>{{item}}</paper-item>
+      </template>
       <content></content>
     </div>
   </template>

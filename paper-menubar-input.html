@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../iron-menu-behavior/iron-menubar-behavior.html">
 <link rel="import" href="../paper-styles/default-theme.html">
 <link rel="import" href="../paper-menu/paper-menu-shared-styles.html">
+<link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="paper-menu-input-behavior.html">
 
 <!--
@@ -83,8 +84,15 @@ of a menu item will also focus it.
     </style>
 
     <label hidden$="[[!label]]">[[label]]</label>
-    <input type="hidden" name$="[[name]]" value="[[selected]]">
+    
+    <template is="dom-if" if="[[name]]">
+      <input type="hidden" name$="[[name]]" value="[[selected]]">
+    </template>
+    
     <div class="selectable-content horizontal layout">
+      <template is="dom-repeat" items="{{itemLabels}}">
+        <paper-item class="flex center-justified layout">{{item}}</paper-item>
+      </template>
       <content></content>
     </div>
   </template>
