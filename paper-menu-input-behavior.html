@@ -51,7 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     _updateItems: function() {
-      var nodes = Polymer.dom(this.$.list).queryDistributedElements(this.selectable || '*');
+      var nodes = Polymer.dom(this.$$('div')).queryDistributedElements(this.selectable || '*');
       nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
       this._setItems(nodes);
     },
@@ -70,7 +70,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
     attached: function() {
       var boundHandler = this._childNodesChanged.bind(this); 
-      this._observer = Polymer.dom(this.$.list).observeNodes(boundHandler);
+      this._observer = Polymer.dom(this.$$('div')).observeNodes(boundHandler);
       this._updateItems();
       if (!this._shouldUpdateSelection) {
         this._updateSelected(this.attrForSelected,this.selected)
