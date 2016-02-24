@@ -84,10 +84,6 @@ of a menu item will also focus it.
 
     <label hidden$="[[!label]]">[[label]]</label>
     
-    <template is="dom-if" if="[[name]]">
-      <input type="hidden" name$="[[name]]" value="[[selected]]">
-    </template>
-    
     <div class="selectable-content">
       <template is="dom-repeat" items="{{itemLabels}}">
         <paper-item>{{item}}</paper-item>
@@ -102,6 +98,7 @@ of a menu item will also focus it.
         is: 'paper-menu-input',
 
         behaviors: [
+          Polymer.IronFormElementBehavior,
           Polymer.IronMenuBehavior,
           Polymer.PaperMenuInputBehavior
         ]

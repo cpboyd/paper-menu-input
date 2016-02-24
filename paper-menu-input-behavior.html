@@ -39,15 +39,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        */
       itemLabels: {
         type: Array
-      },
-      
-      /**
-       * If you're using PaperInputBehavior to implement your own paper-input-like
-       * element, bind this to the `<input type="hidden">`'s `name` property.
-       */
-      name: {
-        type: String
       }
+    },
+
+    // Bind iron-selectable's selected to iron-form-element-behavior's value
+    observers: [
+      '_selectedChanged(selected)'
+    ],
+
+    _selectedChanged: function(selected) {
+      this.value = selected;
     },
 
     _updateItems: function() {
