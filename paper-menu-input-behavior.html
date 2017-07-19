@@ -23,7 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        *
        * @event change
        */
-       
+
       /**
        * The label for this input. If you're using PaperInputBehavior to
        * implement your own paper-input-like element, bind this to
@@ -33,11 +33,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       label: {
         type: String
       },
-      
+
       /**
        * Array of menu values.
        */
       itemLabels: {
+        type: Array
+      },
+
+      /**
+       * Array of mappings for the current selected value.
+       */
+      valueMap: {
         type: Array
       }
     },
@@ -48,7 +55,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     ],
 
     _selectedChanged: function(selected) {
-      this.value = selected;
+      // If mappings are present, attempt to map value.
+      this.value = (this.valueMap != null && this.valueMap.length > selected) ? this.valueMap[selected] : selected;
     },
 
     _updateItems: function() {
@@ -70,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
     },
     attached: function() {
-      var boundHandler = this._childNodesChanged.bind(this); 
+      var boundHandler = this._childNodesChanged.bind(this);
       this._observer = Polymer.dom(this.$$('div')).observeNodes(boundHandler);
       this._updateItems();
       if (!this._shouldUpdateSelection) {
