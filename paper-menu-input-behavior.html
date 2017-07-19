@@ -54,9 +54,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       '_selectedChanged(selected)'
     ],
 
-    _selectedChanged: function(selected) {
+    _selectedChanged: function() {
       // If mappings are present, attempt to map value.
-      this.value = (this.valueMap != null && this.valueMap.length > selected) ? this.valueMap[selected] : selected;
+      this.value = (this.selected != null && this.valueMap != null && this.valueMap.length > this.selected) ? this.valueMap[this.selected] : this.selected;
     },
 
     _updateItems: function() {
@@ -64,6 +64,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
       this._setItems(nodes);
     },
+
     // observe items change under the given node.
     _childNodesChanged: function(mutations) {
         this._updateItems();
@@ -81,9 +82,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var boundHandler = this._childNodesChanged.bind(this);
       this._observer = Polymer.dom(this.$$('div')).observeNodes(boundHandler);
       this._updateItems();
-      if (!this._shouldUpdateSelection) {
-        this._updateSelected(this.attrForSelected,this.selected)
-      }
+
+      // Update value with mapping if available.
+      this._selectedChanged();
       this._addListener(this.activateEvent);
     }
   };
